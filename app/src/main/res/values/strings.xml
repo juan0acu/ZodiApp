@@ -5,8 +5,8 @@
 
     <!--    BottomBar-->
     <string name="horoscope">Horoscopo</string>
-    <string name="palmistry">Palmistry</string>
-    <string name="luck">Luck</string>
+    <string name="palmistry">Leer tu Palma</string>
+    <string name="luck">Suerte</string>
 
 
 </resources>
