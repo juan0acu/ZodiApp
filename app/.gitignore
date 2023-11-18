@@ -1,1 +1,44 @@
-/build
+# Android
+*.apk
+*.ap_
+*.dex
+build/
+.gradle/
+captures/
+
+# IntelliJ
+.idea/
+
+# Gradle
+.gradle/
+build/
+
+# User-specific files
+.gradle/
+local.properties
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Thumbnails
+._*
+Thumbs.db
+
+# Android Studio Navigation editor temp files
+.navigation/
+
+# Android Studio captures folder
+captures/
+
+# JetBrains
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# Keystore files
+*.jks
