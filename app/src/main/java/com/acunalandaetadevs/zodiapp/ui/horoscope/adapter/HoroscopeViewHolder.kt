@@ -1,17 +1,33 @@
 package com.acunalandaetadevs.zodiapp.ui.horoscope.adapter
 
 import android.view.View
+import android.view.animation.LinearInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.acunalandaetadevs.zodiapp.databinding.ItemHoroscopeBinding
 import com.acunalandaetadevs.zodiapp.domain.model.HoroscopeInfo
 
-class HoroscopeViewHolder(view:View):RecyclerView.ViewHolder(view) {
+class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemHoroscopeBinding.bind(view)
 
-    fun render(horoscopeInfo: HoroscopeInfo){
+    fun render(horoscopeInfo: HoroscopeInfo, onItemSelected: (HoroscopeInfo) -> Unit) {
         val context = binding.tvTitle.context
         binding.ivHoroscope.setImageResource(horoscopeInfo.img)
         binding.tvTitle.text = context.getString(horoscopeInfo.name)
+
+        binding.parent.setOnClickListener {
+            //onItemSelected(horoscopeInfo)
+            starRotationAnimation(binding.ivHoroscope, newLambda = {onItemSelected(horoscopeInfo)})
+        }
+    }
+
+    private fun starRotationAnimation(view: View, newLambda: () -> Unit) {
+        view.animate().apply {
+            duration = 500
+            interpolator = LinearInterpolator()
+            rotationBy(360f)
+            withEndAction { newLambda() }
+            start()
+        }
     }
 }
