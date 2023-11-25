@@ -3,6 +3,7 @@ package com.acunalandaetadevs.zodiapp.ui.detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class HoroscopeDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHoroscopeDetailBinding
-    private val horoscopeDetailViewModel by viewModels<HoroscopeDetailViewModel>()
+    private val horoscopeDetailViewModel:HoroscopeDetailViewModel by viewModels()
 
     private val args: HoroscopeDetailActivityArgs by navArgs()
 
@@ -25,6 +26,7 @@ class HoroscopeDetailActivity : AppCompatActivity() {
         binding = ActivityHoroscopeDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUI()
+        horoscopeDetailViewModel.getHoroscope(args.type.name)
     }
 
     private fun initUI() {
@@ -38,19 +40,24 @@ class HoroscopeDetailActivity : AppCompatActivity() {
                     when (it) {
                         HoroscopeDetailState.Loading -> loadingState()
                         is HoroscopeDetailState.Error -> errorState()
-                        is HoroscopeDetailState.Success -> successState()
+                        is HoroscopeDetailState.Success -> successState(it)
                     }
                 }
             }
         }
     }
 
-    private fun successState() {
+    private fun successState(state: HoroscopeDetailState.Success) {
+        binding.pb.isVisible = false
+        binding.tvTitle.text = state.sing
+        binding.tvBody.text = state.prediction
     }
 
     private fun errorState() {
+        binding.pb.isVisible = false
     }
 
     private fun loadingState() {
+        binding.pb.isVisible = true
     }
 }

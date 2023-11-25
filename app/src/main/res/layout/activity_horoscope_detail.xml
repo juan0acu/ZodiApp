@@ -50,6 +50,7 @@
         tools:text="jdjdjdjdjdjdjdjd jd jdjd jd dj dj djd jd dj djdjd  ddjdjdjddddddhhdhdhdhdhdhdhdhdhdhdhdhhdhdhdhhdhdhdhdhhdhdh" />
 
     <ProgressBar
+        android:id="@+id/pb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateTint="@color/gold"
