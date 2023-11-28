@@ -2,6 +2,7 @@ package com.acunalandaetadevs.zodiapp.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.acunalandaetadevs.zodiapp.domain.model.HoroscopeModel
 import com.acunalandaetadevs.zodiapp.domain.usecase.GetPredictionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -18,14 +19,16 @@ class HoroscopeDetailViewModel @Inject constructor(
 
     private var _state = MutableStateFlow<HoroscopeDetailState>(HoroscopeDetailState.Loading)
     val state: StateFlow<HoroscopeDetailState> = _state
+    lateinit var horoscope:HoroscopeModel
 
-    fun getHoroscope(sing:String){
+    fun getHoroscope(sing: HoroscopeModel){
+        horoscope = sing
         viewModelScope.launch {
             //Hilo principal
             _state.value = HoroscopeDetailState.Loading
-            val result = withContext(Dispatchers.IO){getPredictionUseCase(sing)} //hilo secundario
+            val result = withContext(Dispatchers.IO){getPredictionUseCase(sing.name)} //hilo secundario
             if (result!= null){
-            _state.value= HoroscopeDetailState.Success(result.horoscope,result.sing)
+            _state.value= HoroscopeDetailState.Success(result.horoscope,result.sing,horoscope)
         }else{
             _state.value = HoroscopeDetailState.Error("Error")
         }
