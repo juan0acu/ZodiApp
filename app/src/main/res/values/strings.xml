@@ -22,5 +22,8 @@
     <string name="aquarius">Acuario</string>
     <string name="pisces">Piscis</string>
 
+    <!--    Horoscope-->
+    <string name="share">Share</string>
+
 
 </resources>
