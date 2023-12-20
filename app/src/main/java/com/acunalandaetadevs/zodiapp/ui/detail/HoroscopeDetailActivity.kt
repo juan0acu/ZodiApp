@@ -1,5 +1,7 @@
 package com.acunalandaetadevs.zodiapp.ui.detail
 
+import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -12,6 +14,7 @@ import com.acunalandaetadevs.zodiapp.R
 import com.acunalandaetadevs.zodiapp.databinding.ActivityHoroscopeDetailBinding
 import com.acunalandaetadevs.zodiapp.domain.model.HoroscopeModel
 import com.acunalandaetadevs.zodiapp.domain.model.HoroscopeModel.*
+import com.acunalandaetadevs.zodiapp.ui.util.StatusBarUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -26,6 +29,7 @@ class HoroscopeDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHoroscopeDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        StatusBarUtil.setTransparentStatusBar(this)
         initUI()
         horoscopeDetailViewModel.getHoroscope(args.type)
     }
